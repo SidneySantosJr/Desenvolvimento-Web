@@ -1,0 +1,176 @@
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel do Sistema</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+</head>
+
+<body class="bg-light">
+
+    <div class="container-fluid">
+        <div class="row layout">
+
+            <div class="col-lg-10 col-md-9 p-5 position-relative">
+
+                <h1 class="fs-2">Registrando novo Procurado</h1>
+                <p>Insira os dados</p>
+
+                <form action="#" method="post" class="w-25" autocomplete="off">
+
+                    <div class="mb-2">
+                        <label for="nome">Nome</label>
+                        <input type="text" id="nome" name="nome" class="form-control" required autofocus>
+                    </div>
+
+                    <div class="mb-2">
+                        <label for="imagem">Foto do Procurado</label>
+                        <input type="file" id="imagem" name="imagem" class="form-control" accept="image/*" required>
+                    </div>
+
+                    <div class="mb-2">
+                        <label for="recompensa">Recompensa</label>
+                        <input type="number" id="recompensa" name="recompensa" class="form-control" min="0" required>
+                    </div>
+
+                    <div class="mb-2">
+                        <label for="usuario_de_fruta">Usuário de Fruta?</label>
+                        <select name="usuario_de_fruta" id="usuario_de_fruta" class="form-select" required>
+                            <option value="" disabled selected>Escolha</option>
+                            <option value="sim">Sim</option>
+                            <option value="nao">Não</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-2 d-none" id="campo_fruta">
+                        <label for="fruta">Akuma no Mi</label>
+                        <input type="text" id="fruta" name="fruta" class="form-control">
+                    </div>
+
+                    <div class="mb-2">
+                        <label for="afiliacao">Afiliação</label>
+                        <select name="afiliacao" id="afiliacao" class="form-select" required>
+                            <option value="" disabled selected>Escolha</option>
+                            <option value="pirata">Pirata</option>
+                            <option value="revolucionario">Revolucionário</option>
+                            <option value="bandido">Bandido</option>
+                            <option value="corsario">Corsário</option>
+                        </select>
+                    </div>
+
+                    <div class="mt-3 d-none" id="campo_bando">
+                        <label for="bando">Bando Pirata</label>
+                        <input type="text" id="bando" name="bando" class="form-control">
+                    </div>
+
+                    <div class="mb-2">
+                        <label for="descricao">Descrição do Procurado</label>
+                        <textarea id="descricao" name="descricao" minlength="20" maxlength="100" class="form-control" rows="5" placeholder="Informações sobre o procurado..." required></textarea>
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label">Crimes Cometidos</label>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="pirataria" name="crimes[]" value="pirataria">
+                            <label class="form-check-label" for="pirataria">Pirataria</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="ataque_marinha" name="crimes[]" value="ataque_marinha">
+                            <label class="form-check-label" for="ataque_marinha">Ataque contra a Marinha</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="destruicao_governo" name="crimes[]" value="destruicao_governo">
+                            <label class="form-check-label" for="destruicao_governo">Destruição de propriedade do Governo Mundial</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="roubo" name="crimes[]" value="roubo">
+                            <label class="form-check-label" for="roubo">Roubo de tesouros</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="assassinato" name="crimes[]" value="assassinato">
+                            <label class="form-check-label" for="assassinato">Assassinato</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="rebeliao" name="crimes[]" value="rebeliao">
+                            <label class="form-check-label" for="rebeliao">Rebelião contra o Governo Mundial</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="akuma_proibida" name="crimes[]" value="akuma_proibida">
+                            <label class="form-check-label" for="akuma_proibida">Tentativa de obter uma Akuma no Mi proibida</label>
+                        </div>
+
+                    </div>
+
+                    <div class="mb-2">
+                        <label for="senha_agente">Senha de Autorização</label>
+                        <input type="password" id="senha_agente" name="senha_agente" class="form-control" required>
+                    </div>
+
+                    <input type="hidden" name="orgao" value="Governo Mundial">
+
+                    <input type="datetime-local" id="data_registro" name="data_registro">
+
+                    <button type="submit" class="btn btn-success mt-3">
+                        Registrar Procurado
+                    </button>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        let selectFruta = document.querySelector('#usuario_de_fruta');
+        let divFruta = document.querySelector('#campo_fruta');
+        let campoFruta = document.querySelector('#fruta');
+
+        let selectAfiliacao = document.querySelector('#afiliacao');
+        let divBando = document.querySelector('#campo_bando');
+        let campoBando = document.querySelector('#bando');
+
+        selectFruta.addEventListener('change', function () {
+
+            if (selectFruta.value == "sim") {
+                divFruta.classList.remove('d-none');
+                campoFruta.required = true;
+            } else {
+                divFruta.classList.add('d-none');
+                campoFruta.required = false;
+                campoFruta.value = "";
+            }
+
+        });
+
+        selectAfiliacao.addEventListener('change', function () {
+
+            if (selectAfiliacao.value == "pirata") {
+                divBando.classList.remove('d-none');
+                campoBando.required = true;
+            } else {
+                divBando.classList.add('d-none');
+                campoBando.required = false;
+                campoBando.value = "";
+            }
+
+        });
+
+        document.querySelector("form").addEventListener("submit", function () {
+            alert("Registro feito!");
+        });
+    </script>
+
+</body>
+
+</html>

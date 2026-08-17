@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protótipo de Chat - WhatsApp Web</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* Estrutura principal em linha */
+        body {
+            background-color: #f0f2f5;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* BARRA LATERAL (CONVERSAS) */
+        .sidebar {
+            width: 35%;
+            min-width: 300px;
+            max-width: 400px;
+            background-color: #ffffff;
+            border-right: 1px solid #e9edef;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-header {
+            background-color: #f0f2f5;
+            height: 60px;
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+        }
+
+        .chat-list {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        /* Item da lista de conversa */
+        .chat-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 16px;
+            cursor: pointer;
+            border-bottom: 1px solid #f0f2f5;
+            transition: background 0.2s;
+        }
+
+        .chat-item:hover {
+            background-color: #f5f6f6;
+        }
+
+        /* Destaque para a conversa selecionada (ativa) */
+        .chat-item.active {
+            background-color: #efeae2;
+        }
+
+        .chat-item .avatar {
+            background-color: #00a884; /* Cor diferente para diferenciar */
+        }
+
+        .chat-info {
+            flex: 1;
+        }
+
+        .chat-info-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+
+        .chat-info h3 {
+            font-size: 16px;
+            font-weight: 400;
+            color: #111b21;
+        }
+
+        .chat-time {
+            font-size: 12px;
+            color: #667781;
+        }
+
+        .chat-preview {
+            font-size: 14px;
+            color: #667781;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 250px;
+        }
+
+
+        /* ÁREA DA CONVERSA ATIVA (DIREITA) */
+        .chat-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background-color: #efeae2;
+        }
+
+        .chat-header {
+            background-color: #f0f2f5; /* WhatsApp Web usa fundo cinza no topo */
+            height: 60px;
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid #e9edef;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            background-color: #ccc;
+            border-radius: 50%;
+        }
+
+        .user-info h2 {
+            font-size: 16px;
+            font-weight: 500;
+            color: #111b21;
+        }
+
+        .user-info span {
+            font-size: 12px;
+            color: #667781;
+        }
+
+        /* Histórico de Mensagens */
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background-image: url('https://githubusercontent.com');
+            background-blend-mode: overlay;
+            background-color: #efeae2;
+        }
+
+        /* Balões */
+        .message {
+            max-width: 65%;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 14.5px;
+            line-height: 19px;
+            word-wrap: break-word;
+            box-shadow: 0 1px 0.5px rgba(0,0,0,0.13);
+        }
+
+        .message.sent {
+            background-color: #d9fdd3;
+            align-self: flex-end;
+            border-top-right-radius: 0;
+        }
+
+        .message.received {
+            background-color: #ffffff;
+            align-self: flex-start;
+            border-top-left-radius: 0;
+        }
+
+        /* Rodapé de entrada */
+        .chat-footer {
+            background-color: #f0f2f5;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+            background-color: white;
+        }
+
+        .send-btn {
+            background-color: #00a884;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BARRA LATERAL ESQUERDA -->
+    <aside class="sidebar">
+        <header class="sidebar-header">
+            <div class="avatar" style="background-color: #51585c;"></div> <!-- Seu avatar -->
+        </header>
+        
+        <div class="chat-list">
+            <!-- Conversa 1 (Selecionada por padrão) -->
+            <div class="chat-item active">
+                <div class="avatar"></div>
+                <div class="chat-info">
+                    <div class="chat-info-top">
+                        <h3>Contato de Teste</h3>
+                        <span class="chat-time">16:45</span>
+                    </div>
+                    <p class="chat-preview">Você pode digitar ali embaixo...</p>
+                </div>
+            </div>
+
+            <!-- Conversa 2 -->
+            <div class="chat-item">
+                <div class="avatar" style="background-color: #34b7f1;"></div>
+                <div class="chat-info">
+                    <div class="chat-info-top">
+                        <h3>Grupo da Família</h3>
+                        <span class="chat-time">15:30</span>
+                    </div>
+                    <p class="chat-preview">Mãe: Não esquece o pão!</p>
+                </div>
+            </div>
+
+            <!-- Conversa 3 -->
+            <div class="chat-item">
+                <div class="avatar" style="background-color: #9c27b0;"></div>
+                <div class="chat-info">
+                    <div class="chat-info-top">
+                        <h3>Trabalho / Projetos</h3>
+                        <span class="chat-time">Ontem</span>
+                    </div>
+                    <p class="chat-preview">Carlos: O JSON ficou pronto?</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ÁREA DA CONVERSA DIREITA -->
+    <main class="chat-area">
+        <header class="chat-header">
+            <div class="avatar"></div>
+            <div class="user-info">
+                <h2 id="currentChatName">Contato de Teste</h2>
+                <span>online</span>
+            </div>
+        </header>
+
+        <div class="chat-messages" id="chatContainer">
+            <div class="message received">Olá! Este é um protótipo de tela.</div>
+            <div class="message received">Você pode digitar ali embaixo para simular o envio de mensagens reais.</div>
+        </div>
+
+        <footer class="chat-footer">
+            <input type="text" id="messageInput" class="chat-input" placeholder="Digite uma mensagem" autocomplete="off">
+            <button id="sendBtn" class="send-btn">➔</button>
+        </footer>
+    </main>
+
+    <script>
+        const chatContainer = document.getElementById('chatContainer');
+        const messageInput = document.getElementById('messageInput');
+        const sendBtn = document.getElementById('sendBtn');
+
+        function enviarMensagem() {
+            const texto = messageInput.value.trim();
+            if (texto === '') return;
+
+            const novaMensagem = document.createElement('div');
+            novaMensagem.classList.add('message', 'sent');
+            novaMensagem.innerText = texto;
+
+            chatContainer.appendChild(novaMensagem);
+            messageInput.value = '';
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        sendBtn.addEventListener('click', enviarMensagem);
+        messageInput.addEventListener('keydown', (evento) => {
+            if (evento.key === 'Enter') {
+                enviarMensagem();
+            }
+        });
+    </script>
+</body>
+</html>

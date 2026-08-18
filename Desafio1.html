@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Protótipo de Chat - WhatsApp Web</title>
+    <title>Protótipo de Chat</title>
     <style>
         * {
             margin: 0;
@@ -12,7 +12,6 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
-        /* Estrutura principal em linha */
         body {
             background-color: #f0f2f5;
             display: flex;
@@ -20,7 +19,6 @@
             overflow: hidden;
         }
 
-        /* BARRA LATERAL (CONVERSAS) */
         .sidebar {
             width: 35%;
             min-width: 300px;
@@ -44,7 +42,6 @@
             overflow-y: auto;
         }
 
-        /* Item da lista de conversa */
         .chat-item {
             display: flex;
             align-items: center;
@@ -59,13 +56,12 @@
             background-color: #f5f6f6;
         }
 
-        /* Destaque para a conversa selecionada (ativa) */
         .chat-item.active {
             background-color: #efeae2;
         }
 
         .chat-item .avatar {
-            background-color: #00a884; /* Cor diferente para diferenciar */
+            background-color: #00a884;
         }
 
         .chat-info {
@@ -99,8 +95,6 @@
             max-width: 250px;
         }
 
-
-        /* ÁREA DA CONVERSA ATIVA (DIREITA) */
         .chat-area {
             flex: 1;
             display: flex;
@@ -109,8 +103,7 @@
         }
 
         .chat-header {
-            background-color: #f0f2f5; /* WhatsApp Web usa fundo cinza no topo */
-            height: 60px;
+            background-color: #f0f2f5;
             padding: 10px 16px;
             display: flex;
             align-items: center;
@@ -136,7 +129,6 @@
             color: #667781;
         }
 
-        /* Histórico de Mensagens */
         .chat-messages {
             flex: 1;
             overflow-y: auto;
@@ -144,12 +136,10 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
-            background-image: url('https://githubusercontent.com');
             background-blend-mode: overlay;
             background-color: #efeae2;
         }
 
-        /* Balões */
         .message {
             max-width: 65%;
             padding: 8px 12px;
@@ -172,7 +162,6 @@
             border-top-left-radius: 0;
         }
 
-        /* Rodapé de entrada */
         .chat-footer {
             background-color: #f0f2f5;
             padding: 10px 15px;
@@ -208,64 +197,58 @@
 </head>
 <body>
 
-    <!-- BARRA LATERAL ESQUERDA -->
     <aside class="sidebar">
         <header class="sidebar-header">
             <div class="avatar" style="background-color: #51585c;"></div> <!-- Seu avatar -->
         </header>
         
         <div class="chat-list">
-            <!-- Conversa 1 (Selecionada por padrão) -->
             <div class="chat-item active">
                 <div class="avatar"></div>
                 <div class="chat-info">
                     <div class="chat-info-top">
-                        <h3>Contato de Teste</h3>
+                        <h3>Conversa 1</h3>
                         <span class="chat-time">16:45</span>
                     </div>
-                    <p class="chat-preview">Você pode digitar ali embaixo...</p>
+                    <p class="chat-preview">Teste 1</p>
                 </div>
             </div>
 
-            <!-- Conversa 2 -->
             <div class="chat-item">
                 <div class="avatar" style="background-color: #34b7f1;"></div>
                 <div class="chat-info">
                     <div class="chat-info-top">
-                        <h3>Grupo da Família</h3>
+                        <h3>Conversa 2</h3>
                         <span class="chat-time">15:30</span>
                     </div>
-                    <p class="chat-preview">Mãe: Não esquece o pão!</p>
+                    <p class="chat-preview">Teste 2</p>
                 </div>
             </div>
 
-            <!-- Conversa 3 -->
             <div class="chat-item">
                 <div class="avatar" style="background-color: #9c27b0;"></div>
                 <div class="chat-info">
                     <div class="chat-info-top">
-                        <h3>Trabalho / Projetos</h3>
+                        <h3>Conversa 3</h3>
                         <span class="chat-time">Ontem</span>
                     </div>
-                    <p class="chat-preview">Carlos: O JSON ficou pronto?</p>
+                    <p class="chat-preview">Teste 3</p>
                 </div>
             </div>
         </div>
     </aside>
 
-    <!-- ÁREA DA CONVERSA DIREITA -->
     <main class="chat-area">
         <header class="chat-header">
             <div class="avatar"></div>
             <div class="user-info">
-                <h2 id="currentChatName">Contato de Teste</h2>
+                <h2 id="currentChatName">Teste 1</h2>
                 <span>online</span>
             </div>
         </header>
 
         <div class="chat-messages" id="chatContainer">
-            <div class="message received">Olá! Este é um protótipo de tela.</div>
-            <div class="message received">Você pode digitar ali embaixo para simular o envio de mensagens reais.</div>
+            <div class="message received">Protótipo de conversa 1</div>
         </div>
 
         <footer class="chat-footer">

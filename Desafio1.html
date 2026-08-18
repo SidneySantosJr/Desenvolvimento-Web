@@ -14,9 +14,14 @@
 
         body {
             background-color: #f0f2f5;
-            display: flex;
             height: 100vh;
             overflow: hidden;
+        }
+
+        .main-container {
+            display: flex;
+            width: 100vw;
+            height: 100vh;
         }
 
         .sidebar {
@@ -197,65 +202,69 @@
 </head>
 <body>
 
-    <aside class="sidebar">
-        <header class="sidebar-header">
-            <div class="avatar" style="background-color: #51585c;"></div> <!-- Seu avatar -->
-        </header>
-        
-        <div class="chat-list">
-            <div class="chat-item active">
+    <div class="main-container">
+
+        <aside class="sidebar">
+            <header class="sidebar-header">
+                <div class="avatar" style="background-color: #51585c;"></div>
+            </header>
+            
+            <div class="chat-list">
+                <div class="chat-item active">
+                    <div class="avatar"></div>
+                    <div class="chat-info">
+                        <div class="chat-info-top">
+                            <h3>Conversa 1</h3>
+                            <span class="chat-time">16:45</span>
+                        </div>
+                        <p class="chat-preview">Teste 1</p>
+                    </div>
+                </div>
+
+                <div class="chat-item">
+                    <div class="avatar" style="background-color: #34b7f1;"></div>
+                    <div class="chat-info">
+                        <div class="chat-info-top">
+                            <h3>Conversa 2</h3>
+                            <span class="chat-time">15:30</span>
+                        </div>
+                        <p class="chat-preview">Teste 2</p>
+                    </div>
+                </div>
+
+                <div class="chat-item">
+                    <div class="avatar" style="background-color: #9c27b0;"></div>
+                    <div class="chat-info">
+                        <div class="chat-info-top">
+                            <h3>Conversa 3</h3>
+                            <span class="chat-time">Ontem</span>
+                        </div>
+                        <p class="chat-preview">Teste 3</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="chat-area">
+            <header class="chat-header">
                 <div class="avatar"></div>
-                <div class="chat-info">
-                    <div class="chat-info-top">
-                        <h3>Conversa 1</h3>
-                        <span class="chat-time">16:45</span>
-                    </div>
-                    <p class="chat-preview">Teste 1</p>
+                <div class="user-info">
+                    <h2 id="currentChatName">Teste 1</h2>
+                    <span>online</span>
                 </div>
+            </header>
+
+            <div class="chat-messages" id="chatContainer">
+                <div class="message received">Protótipo de conversa 1</div>
             </div>
 
-            <div class="chat-item">
-                <div class="avatar" style="background-color: #34b7f1;"></div>
-                <div class="chat-info">
-                    <div class="chat-info-top">
-                        <h3>Conversa 2</h3>
-                        <span class="chat-time">15:30</span>
-                    </div>
-                    <p class="chat-preview">Teste 2</p>
-                </div>
-            </div>
+            <footer class="chat-footer">
+                <input type="text" id="messageInput" class="chat-input" placeholder="Digite uma mensagem" autocomplete="off">
+                <button id="sendBtn" class="send-btn">➔</button>
+            </footer>
+        </main>
 
-            <div class="chat-item">
-                <div class="avatar" style="background-color: #9c27b0;"></div>
-                <div class="chat-info">
-                    <div class="chat-info-top">
-                        <h3>Conversa 3</h3>
-                        <span class="chat-time">Ontem</span>
-                    </div>
-                    <p class="chat-preview">Teste 3</p>
-                </div>
-            </div>
-        </div>
-    </aside>
-
-    <main class="chat-area">
-        <header class="chat-header">
-            <div class="avatar"></div>
-            <div class="user-info">
-                <h2 id="currentChatName">Teste 1</h2>
-                <span>online</span>
-            </div>
-        </header>
-
-        <div class="chat-messages" id="chatContainer">
-            <div class="message received">Protótipo de conversa 1</div>
-        </div>
-
-        <footer class="chat-footer">
-            <input type="text" id="messageInput" class="chat-input" placeholder="Digite uma mensagem" autocomplete="off">
-            <button id="sendBtn" class="send-btn">➔</button>
-        </footer>
-    </main>
+    </div>
 
     <script>
         const chatContainer = document.getElementById('chatContainer');

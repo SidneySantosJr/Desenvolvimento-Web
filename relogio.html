@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relógio Digital com Ractive.js</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/ractive"></script>
+
+    <style>
+        body {
+            background-color: #0f172a;
+            color: #38bdf8;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .relogio-container {
+            text-align: center;
+            background-color: #1e293b;
+            padding: 40px 60px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            border: 2px solid #334155;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            color: #94a3b8;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .tempo {
+            font-size: 4rem;
+            font-weight: bold;
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="relogio-app"></div>
+
+    <script id="relogio-template" type="text/interactive">
+        <div class="relogio-container">
+            <h1>Horário Local</h1>
+            <div class="tempo">{{horas}}:{{minutos}}:{{segundos}}</div>
+        </div>
+    </script>
+
+    <script>
+        function formatarNumero(num) {
+            return num < 10 ? '0' + num : num;
+        }
+
+        // Garante que o código só rode após o HTML estar totalmente montado
+        window.addEventListener('DOMContentLoaded', function() {
+            const app = new Ractive({
+                target: '#relogio-app',
+                template: '#relogio-template',
+                data: {
+                    horas: '00',
+                    minutos: '00',
+                    segundos: '00'
+                }
+            });
+
+            function atualizarRelogio() {
+                const agora = new Date();
+                app.set('horas', formatarNumero(agora.getHours()));
+                app.set('minutos', formatarNumero(agora.getMinutes()));
+                app.set('segundos', formatarNumero(agora.getSeconds()));
+            }
+
+            atualizarRelogio();
+            setInterval(atualizarRelogio, 1000);
+        });
+    </script>
+
+</body>
+</html>
